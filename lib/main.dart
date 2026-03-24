@@ -1,14 +1,21 @@
-void main() {
-  print('------> Started the Application');
+void main() async {
+  print("Start");
+  // This async function will pause internally
+  delayedTask();
+  // This runs immediately (not blocked)
+  print("This runs immediately after calling delayedTask");
 
-  String data = fetchData();
-  print('the data is $data');
-
-  print("-------> The program has ended");
+  // Another async task
+  Future(() {
+    print("Event queue task executed");
+  });
+  print("End");
 }
 
-String fetchData() {
-  print('Inside the fetchData() method');
-  Future.delayed(Duration(seconds: 3));
-  return "Future";
+Future<void> delayedTask() async {
+  print("Delayed task started");
+
+  await Future.delayed(Duration(seconds: 6));
+
+  print("Delayed task completed after 6 seconds");
 }
